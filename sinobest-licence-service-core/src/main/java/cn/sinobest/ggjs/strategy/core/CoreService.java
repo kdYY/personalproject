@@ -45,8 +45,7 @@ public class CoreService {
 
 		String oldJarPath = packageInfo.getPackagePath() + File.separator + packageInfo.getPackgeName();
 		String ImpressTempPath = packageInfo.getTargetPath();
-		String CompressDes = packageInfo.getTargetPath() + File.separator + packageInfo.getPackgeName();
-
+		String CompressDes = packageInfo.getPackagePath() +File.separator+"newJar"+ File.separator + packageInfo.getPackgeName();
 		File src = new File(oldJarPath);//jar存放的位置
 		File des = new File(ImpressTempPath); //unJarpath
 

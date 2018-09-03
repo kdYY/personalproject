@@ -2,6 +2,7 @@ package cn.sinobest.ggjs.strategy.basic.builder;
 
 import java.io.File;
 
+import cn.sinobest.ggjs.strategy.basic.util.ByteHex;
 import cn.sinobest.ggjs.strategy.core.builder.InjectCheckPointBuilder;
 import cn.sinobest.ggjs.strategy.builder.AbstractBuilder;
 import cn.sinobest.ggjs.strategy.domain.PackageInfo;
@@ -56,8 +57,10 @@ public class CopyBuilder extends AbstractBuilder {
 		//set the license private key
 		String VclassToChange = "cn.sinobest.ggjs.strategy.StrategyVerify";
 		String VmethodName = "initE";
+
+
 		String VinsertWord = "try {\n" +
-				"            this.e = cn.sinobest.ggjs.util.ByteHex.convert(\""+strategyInfo.getPrivateKey()+"\");\n" +
+				"            this.e = "+ByteHex.class.getName()+".convert(\""+strategyInfo.getPrivateKey()+"\");\n" +
 				"        } catch (Exception var5) {\n" +
 				"            var5.printStackTrace();\n" +
 				"        }";
