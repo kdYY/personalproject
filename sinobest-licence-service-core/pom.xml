@@ -24,13 +24,6 @@
 			<artifactId>javassist</artifactId>
 			<version>3.18.2-GA</version>
 		</dependency>
-		
-<!-- 		<dependency>
-			<groupId>cn.sinobest.ggjs</groupId>
-			<artifactId>sinobest-licence-strategy</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/lib/sinobest-licence-strategy-0.0.1-SNAPSHOT.jar</systemPath>
-		</dependency> -->
+
 	</dependencies>
 </project>
