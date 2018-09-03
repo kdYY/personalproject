@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import cn.sinobest.ggjs.exception.LicenseNotFoundException;
-import cn.sinobest.ggjs.util.ByteHex;
-import cn.sinobest.ggjs.util.DateParser;
-import cn.sinobest.ggjs.util.FileUtil;
-import cn.sinobest.ggjs.util.MACAddressUtil;
-import cn.sinobest.ggjs.util.SignatureUtil;
-import cn.sinobest.ggjs.util.StringUtils;
+import cn.sinobest.ggjs.strategy.AbstractStrategy;
+import cn.sinobest.ggjs.strategy.basic.exception.LicenseNotFoundException;
+import cn.sinobest.ggjs.strategy.basic.util.ByteHex;
+import cn.sinobest.ggjs.strategy.basic.util.DateParser;
+import cn.sinobest.ggjs.strategy.basic.util.FileUtil;
+import cn.sinobest.ggjs.strategy.basic.util.MACAddressUtil;
+import cn.sinobest.ggjs.strategy.basic.util.SignatureUtil;
+import cn.sinobest.ggjs.strategy.basic.util.StringUtils;
 
 public class StrategyVerify extends AbstractStrategy {
 

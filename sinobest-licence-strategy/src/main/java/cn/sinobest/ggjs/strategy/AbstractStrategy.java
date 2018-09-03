@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import cn.sinobest.ggjs.builder.AbstractBuilder;
-import cn.sinobest.ggjs.domain.PackageInfo;
-import cn.sinobest.ggjs.domain.StrategyInfo;
+import cn.sinobest.ggjs.strategy.builder.AbstractBuilder;
+import cn.sinobest.ggjs.strategy.domain.PackageInfo;
+import cn.sinobest.ggjs.strategy.domain.StrategyInfo;
+
 
 public abstract class AbstractStrategy {
 
