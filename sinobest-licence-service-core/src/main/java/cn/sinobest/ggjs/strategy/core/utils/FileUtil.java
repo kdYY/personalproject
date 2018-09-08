@@ -138,7 +138,19 @@ public class FileUtil {
             }else if(OS.indexOf("windows") >= 0){
 
                 System.out.println("windows");
-                String jarcomond = System.getProperty("java.home").substring(0,System.getProperty("java.home").indexOf("jre"))+"bin\\";
+                String jarcomond = "";
+                File jarfile = new File(System.getProperty("java.home").substring(0,System.getProperty("java.home").indexOf("jre")));
+                for (File file1 : searchFile(jarfile, "jar.exe")) {
+                    if(file1.getName().equals("jar.exe")){
+                        jarcomond = file1.getAbsolutePath();
+                        break;
+                    }
+                }
+
+                if(jarcomond.equals("")){
+                    jarcomond = System.getProperty("java.home").substring(0,System.getProperty("java.home").indexOf("jre"))+File.separator+"bin"+File.separator;
+                }
+
                 commond = jarcomond+"jar -cfM0 "+CompressDes+" -C "+CompressSrc+" .";
 
                 System.out.println("执行commond"+commond);
@@ -161,12 +173,39 @@ public class FileUtil {
 
 
 
-    private static void chooseAllFiles(File file , List<File> files){
-        if(file.isDirectory()){
-            for(File child : file.listFiles())
-                chooseAllFiles(child,files);
-        }else
-            files.add(file);
+    private static File[] searchFile(File folder,String keyWord){
+
+        File[] subFolders = folder.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                if (pathname.isDirectory() || (pathname.isFile()
+                        && pathname.getName().toLowerCase().contains(keyWord.toLowerCase())))
+                    return  true;
+                else
+                    return false;
+            }
+        });
+
+        for (File subFolder : subFolders) {
+            subFolder.getName();
+        }
+
+        List<File> result = new ArrayList<File>();// 声明一个集合
+        for (int i = 0; i < subFolders.length; i++) {// 循环显示文件夹或文件
+            if (subFolders[i].isFile()) {
+                result.add(subFolders[i]);
+            } else {
+                File[] foldResult = searchFile(subFolders[i], keyWord);
+
+                for (int j = 0; j < foldResult.length; j++) {// 循环显示文件
+                    result.add(foldResult[j]);// 文件保存到集合中
+                }
+            }
+        }
+        File files[] = new File[result.size()];// 声明文件数组，长度为集合的长度
+        result.toArray(files);// 集合数组化
+        return files;
+
     }
 
     public static boolean deleteDir(File someFile) {
@@ -241,6 +280,10 @@ public class FileUtil {
 			throw new RuntimeException("lib no exsit");
 		}
         
+    }
+
+    public static void main(String[] args) {
+        System.out.println(FileUtil.class.getResource("/").toString());
     }
     
     

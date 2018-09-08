@@ -25,7 +25,7 @@ public class CoreService {
 	}
 	
 	/**
-	 * 实例化用户自定义编程Strategy
+	 * 实例化编程用户自定义编程Strategy
 	 * @return
 	 * @throws Exception
 	 */
@@ -35,8 +35,10 @@ public class CoreService {
 		if (!(strategyClass1.newInstance() instanceof AbstractStrategy)) {
 			throw new ClassCastException("error class type");
 		}
-		Constructor constructor = strategyClass1.getConstructor(new Class[] {PackageInfo.class, StrategyInfo.class});
-		AbstractStrategy strategy = (AbstractStrategy) constructor.newInstance(new Object[] {packageInfo, strategyInfo});
+		Constructor constructor = strategyClass1.getConstructor(
+		        new Class[] {PackageInfo.class, StrategyInfo.class});
+		AbstractStrategy strategy = (AbstractStrategy) constructor.newInstance(
+		        new Object[] {packageInfo, strategyInfo});
 
 		return strategy;
 	}
@@ -55,7 +57,6 @@ public class CoreService {
 		LOGGER.info(src.getAbsolutePath() + "has finished");
 
 		//执行策略
-
 		AbstractStrategy strategy = this.getStrategyInstance();
 		packageInfo = strategy.excute();
 		LOGGER.info("strategy has finished");
@@ -65,6 +66,14 @@ public class CoreService {
 		String CompressSrc = ImpressTempPath + File.separator;
 		FileUtil.compressJarByCommond(CompressSrc, CompressDes);
 		LOGGER.info("package new jar has finished--" + CompressDes);
+
+		//delete file
+		Boolean result = FileUtil.deleteDir(des);
+		while(!result && des.exists()){
+			System.gc();//force delete
+			result = FileUtil.deleteDir(des);
+		}
+
 
 		return packageInfo;
 	}
